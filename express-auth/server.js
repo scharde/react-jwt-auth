@@ -1,65 +1,52 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const userRouter = require('./User/users'); 
+const tokenService = require('./Utility/tokenService'); 
+const utility = require('./Utility/index'); 
+const userModule = require('./User/user.model'); 
 
 const app = express();
 const port = 3000;
-const secretKey = "yourSecretKey"; // Change this to a strong and secure key in a real-world scenario
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/api/users', tokenService.verifyToken, userRouter); 
 
-const users = [];
-
-// API to create a new user
 app.post("/api/register", (req, res) => {
-  const { username, password, name, email } = req.body;
+  const { password, name, email } = req.body;
 
-  // Basic validation
-  if (!username || !password) {
+  if (!email || !password) {
     return res
       .status(400)
-      .json({ message: "Username and password are required." });
+      .json({ message: "email and password are required." });
   }
 
-  // Check if the username is already taken
-  if (users.find((user) => user.username === username)) {
-    return res.status(400).json({ message: "Username is already taken." });
+  if (userModule.getUserWithEmail(email)) {
+    return res.status(400).json({ message: "email is already taken." });
   }
 
-  // Create a new user
-  const newUser = { username, password, name, email };
-  users.push(newUser);
+  const user1 = new userModule.User(utility.generateRandomId(8), name, email, password);
+  userModule.addUser(user1);
 
   res.status(201).json({ message: "User created successfully." });
 });
 
-// API to login and generate a JWT token
 app.post("/api/login", (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // Find the user in the array
-  const user = users.find(
-    (user) => user.username === username && user.password === password
+  const user = userModule.getAllUsers().find(
+    (user) => user.email === email && user.password === password
   );
 
-  // Check if the user exists
   if (!user) {
     return res.status(401).json({ message: "Invalid credentials." });
   }
 
-  // Generate JWT token
-  const token = jwt.sign(
-    { username: user.username, name: user.name },
-    secretKey,
-    {
-      expiresIn: "1h",
-    }
-  );
-
-  res.json({ token, data: { name: user.name, email: user.email } });
+  const token = tokenService.generateToken(user);
+  res.json({ token, data: { id: user.id, email: user.email } });
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

@@ -1,2 +1,27 @@
 To run locally
--- node server.js
+
+
+1. cd to express-auth folder
+Then run :- node ./server.js
+
+2. To debug it. Open VS code
+Goto Run and Debug Section.
+Launch "Launch Express Server"
+
+3. API's
+
+a. To register user:
+Post: http://localhost:3000/api/register
+Body (json) : { "password" : "P@12345#", "name" : "Sagar", "email" : "sagar@gmail.com" }
+
+b. To Login
+Post: http://localhost:3000/api/login
+Body (json): { "password" : "P@12345#", "email" : "sagar@gmail.com" }
+
+c. To get user data
+Get: http://localhost:3000/api/users/{Id}
+And Set Bearer token
+Or use below
+
+curl --location 'http://localhost:3000/api/users/EV9uzrMa' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhZ2FyQGdtYWlsLmNvbSIsImlkIjoiN2R5WmJTbmIiLCJpYXQiOjE3MTMzNTA4OTcsImV4cCI6MTcxMzM1NDQ5N30.Vgwmxe5KB4eU-Ek9wBbOXTLtcO6J9dymndQHxgf7KPI'
