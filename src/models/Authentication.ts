@@ -1,11 +1,11 @@
 export interface RegisterModel {
   name: string;
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface LoginModel {
-  username: string;
+  email: string;
   password: string;
 }
 

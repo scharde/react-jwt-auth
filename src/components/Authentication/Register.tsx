@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import styles from "./register.module.css";
 import { register } from "../../services/authService";
 import { RegisterModel, RegisterStatusType } from "../../models/Authentication";
 import { Link } from "react-router-dom";
 
 const defaultRegisterModel: RegisterModel = {
   name: "",
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -48,44 +47,48 @@ const Register = () => {
     );
 
   return (
-    <form className={styles["register-form"]} onSubmit={handleSubmit}>
-      <h2>Registration Form</h2>
-      <div className={styles["form-group"]}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+    <div className="main-card">
+      <div className="card">
+        <form onSubmit={handleSubmit}>
+          <h2>Registration Form</h2>
+          <div className="form-group">
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="username=">Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="username"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit">Register</button>
+          {registerStatusMessage}
+        </form>
       </div>
-      <div className={styles["form-group"]}>
-        <label htmlFor="username=">Email:</label>
-        <input
-          type="email"
-          name="username"
-          id="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className={styles["form-group"]}>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Register</button>
-      {registerStatusMessage}
-    </form>
+    </div>
   );
 };
 

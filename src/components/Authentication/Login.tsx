@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./login.module.css";
 import { LoginModel } from "../../models/Authentication";
-import { login } from "../../services/authService";
-import { useNavigate } from "react-router-dom";
+import { login, saveToken } from "../../services/authService";
+import { Link, useNavigate } from "react-router-dom";
 
 const defaultLoginModel: LoginModel = {
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -25,40 +25,51 @@ const Login = () => {
     try {
       var result = await login(formData);
 
-      navigate("/");
+      if (result.status == 200) {
+        saveToken(result.data.token);
+        navigate("/", { replace: true });
+      }
     } catch (error) {
+      console.log(error);
       setLoginMessage("Error in login");
     }
   };
 
   return (
-    <form className={styles["login-form"]} onSubmit={handleSubmit}>
-      <h2>Login Form</h2>
-      <div className={styles["form-group"]}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="username"
-          id="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
+    <div className="main-card">
+      <div className="card">
+        <form onSubmit={handleSubmit}>
+          <h2>Log In</h2>
+          <div className="form-group">
+            <label htmlFor="email">Email Address:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styles["loginBtnContainer"]}>
+            <button type="submit">Log In</button>
+            <Link to={"/register"}>Register</Link>
+          </div>
+          {loginMessage ?? <p>{loginMessage}</p>}
+        </form>
       </div>
-      <div className={styles["form-group"]}>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
-      {loginMessage ?? <p>{loginMessage}</p>}
-    </form>
+    </div>
   );
 };
 

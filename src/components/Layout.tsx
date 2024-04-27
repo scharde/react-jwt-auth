@@ -1,0 +1,29 @@
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { removeToken } from "../services/authService";
+
+const Layout = () => {
+  const navigate = useNavigate();
+
+  const onLogOutClickHnd = () => {
+    removeToken();
+    navigate("/login");
+  };
+
+  return (
+    <div>
+      <nav className="navbar">
+        <div className="navbar-brand">My App</div>
+        <div className="navbar-links">
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <button onClick={onLogOutClickHnd}>Logout</button>
+        </div>
+      </nav>
+      <main className="main">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default Layout;

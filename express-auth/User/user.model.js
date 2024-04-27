@@ -11,14 +11,14 @@ User.prototype.toJSON = function () {
   return {
     id: this.id,
     name: this.name,
-    email: this.email
+    email: this.email,
   };
 };
 
 // Methods to manage the user array
 const addUser = (user) => {
   if (!user instanceof User) {
-    throw new Error('Invalid user object provided');
+    throw new Error("Invalid user object provided");
   }
   users.push(user);
 };
@@ -32,13 +32,13 @@ const getAllUsers = () => {
 };
 
 const getUserWithEmail = (email) => {
-    return users.find((user) => user.username === username);
-}
+  return users.find((user) => user.email === email);
+};
 
 module.exports = {
   User,
   addUser,
   getUserById,
   getAllUsers,
-  getUserWithEmail
+  getUserWithEmail,
 };
