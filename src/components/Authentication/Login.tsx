@@ -3,6 +3,7 @@ import styles from "./login.module.css";
 import { LoginModel } from "../../models/Authentication";
 import { login, saveToken } from "../../services/authService";
 import { Link, useNavigate } from "react-router-dom";
+import Input from "../Common/Input";
 
 const defaultLoginModel: LoginModel = {
   email: "",
@@ -40,28 +41,23 @@ const Login = () => {
       <div className="card">
         <form onSubmit={handleSubmit}>
           <h2>Log In</h2>
-          <div className="form-group">
-            <label htmlFor="email">Email Address:</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <Input
+            label="Email Address"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="password"
+            name="password"
+            label="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+
           <div className={styles["loginBtnContainer"]}>
             <button type="submit">Log In</button>
             <Link to={"/register"}>Register</Link>

@@ -10,7 +10,7 @@ const Layout = () => {
   };
 
   return (
-    <div>
+    <>
       <nav className="navbar">
         <div className="navbar-brand">My App</div>
         <div className="navbar-links">
@@ -22,7 +22,7 @@ const Layout = () => {
       <main className="main">
         <Outlet />
       </main>
-    </div>
+    </>
   );
 };
 

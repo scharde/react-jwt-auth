@@ -56,7 +56,6 @@ const Register = () => {
             <input
               type="text"
               name="name"
-              id="name"
               value={formData.name}
               onChange={handleChange}
               required
@@ -67,7 +66,6 @@ const Register = () => {
             <input
               type="email"
               name="email"
-              id="username"
               value={formData.email}
               onChange={handleChange}
               required
@@ -78,7 +76,6 @@ const Register = () => {
             <input
               type="password"
               name="password"
-              id="password"
               value={formData.password}
               onChange={handleChange}
               required
