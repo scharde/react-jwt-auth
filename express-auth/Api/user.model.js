@@ -1,10 +1,11 @@
 const users = []; // Array to hold user data
 
-const User = function (id, name, email, password) {
+const User = function (id, name, email, password, role) {
   this.id = id;
   this.name = name;
   this.email = email;
   this.password = password;
+  this.role = role;
 };
 
 User.prototype.toJSON = function () {
@@ -12,6 +13,7 @@ User.prototype.toJSON = function () {
     id: this.id,
     name: this.name,
     email: this.email,
+    role: this.role
   };
 };
 

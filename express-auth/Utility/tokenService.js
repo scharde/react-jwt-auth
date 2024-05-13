@@ -15,6 +15,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secretKey);
     req.id = decoded.id;
+    req.userRole = decoded.role;
     next();
   } catch (err) {
     res.status(403).json({ message: "Forbidden: Invalid or expired token" });
@@ -22,7 +23,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const generateToken = (user) => {
-  const token = jwt.sign({ email: user.email, id: user.id }, secretKey, {
+  const token = jwt.sign({ email: user.email, id: user.id, role: user.role }, secretKey, {
     expiresIn: "1h",
   });
 

@@ -15,7 +15,9 @@ const Layout = () => {
         <div className="navbar-brand">My App</div>
         <div className="navbar-links">
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
+          <Link to="/superadmin">Superadmin</Link>
+          <Link to="/admin">Admin</Link>
+          <Link to="/user">User</Link>
           <button onClick={onLogOutClickHnd}>Logout</button>
         </div>
       </nav>

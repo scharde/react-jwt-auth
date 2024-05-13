@@ -7,7 +7,10 @@ const defaultRegisterModel: RegisterModel = {
   name: "",
   email: "",
   password: "",
+  role: "",
 };
+
+const options = ["SuperAdmin", "Admin", "User"];
 
 const Register = () => {
   const [formData, setFormData] = useState(defaultRegisterModel);
@@ -15,7 +18,9 @@ const Register = () => {
     RegisterStatusType.None
   );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
     setRegisterStatus(RegisterStatusType.None);
   };
@@ -80,6 +85,15 @@ const Register = () => {
               onChange={handleChange}
               required
             />
+          </div>
+          <div className="form-group">
+            <label>Role:</label>
+            <select onChange={handleChange} name="role" value={formData.role}>
+              <option>Please choose one option</option>
+              {options.map((option, index) => {
+                return <option key={index}>{option}</option>;
+              })}
+            </select>
           </div>
           <button type="submit">Register</button>
           {registerStatusMessage}

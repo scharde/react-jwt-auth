@@ -10,6 +10,7 @@ interface ITokenData {
   id: string;
   email: string;
   exp: number;
+  role: string;
 }
 
 const saveToken = (token: string) => {

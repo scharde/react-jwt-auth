@@ -23,6 +23,12 @@ input {
   font-size: 15px;
 }
 
+select {
+  height: 32px;
+  padding: 0px 5px;
+  font-size: 15px;
+}
+
 button {
   background-color: rgb(67 56 202);
   color: white;
@@ -58,6 +64,8 @@ button:hover {
 }
 
 .main {
+  margin-top: 50px;
+  font-size: 30px;
   min-height: 300px;
   display: flex;
   justify-content: center;
