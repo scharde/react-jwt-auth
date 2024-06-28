@@ -12,7 +12,7 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/api/", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/", verifyToken, otherRouter);
 app.use("/api/users", verifyToken, userRouter);
 

@@ -1,9 +1,10 @@
 const express = require("express");
 const userModule = require("./user.model");
+const { roles, authorize } = require("../Utility/roles");
 
 const router = express.Router();
 
-router.get("/:id", verifyToken, authorize(roles.SuperAdmin), async (req, res) => {
+router.get("/:id", authorize(roles.SuperAdmin), async (req, res) => {
   const userId = req.params.id;
 
   try {

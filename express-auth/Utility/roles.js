@@ -1,7 +1,7 @@
 const roles = {
-  SuperAdmin: ["SuperAdmin", "Admin", "User"],
-  Admin: ["Admin", "User"],
-  User: ["User"],
+  SuperAdmin: ["SuperAdmin"],
+  Admin: ["SuperAdmin", "Admin"],
+  User: ["SuperAdmin", "Admin", "User"],
 };
 
 const authorize = (allowedRoles) => {
