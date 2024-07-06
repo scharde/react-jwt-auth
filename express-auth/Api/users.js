@@ -4,7 +4,7 @@ const { roles, authorize } = require("../Utility/roles");
 
 const router = express.Router();
 
-router.get("/:id", authorize(roles.SuperAdmin), async (req, res) => {
+router.get("/:id", authorize(roles.User), async (req, res) => {
   const userId = req.params.id;
 
   try {

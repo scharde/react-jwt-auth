@@ -18,12 +18,14 @@ const Layout = () => {
           <Link to="/superadmin">Superadmin</Link>
           <Link to="/admin">Admin</Link>
           <Link to="/user">User</Link>
-          <button onClick={onLogOutClickHnd}>Logout</button>
         </div>
       </nav>
       <main className="main">
         <Outlet />
       </main>
+      <footer>
+        <button onClick={onLogOutClickHnd}>Logout</button>
+      </footer>
     </>
   );
 };

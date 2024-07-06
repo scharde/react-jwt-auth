@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./login.module.css";
 import { LoginModel } from "../../models/Authentication";
 import { login, saveToken } from "../../services/authService";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,35 +36,40 @@ const Login = () => {
   };
 
   return (
-    <div className="main-card">
-      <div className="card">
-        <form onSubmit={handleSubmit}>
-          <h2>Log In</h2>
-          <Input
-            label="Email Address"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <Input
-            type="password"
-            name="password"
-            label="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-
-          <div className={styles["loginBtnContainer"]}>
-            <button type="submit">Log In</button>
-            <Link to={"/register"}>Register</Link>
-          </div>
-          {loginMessage ?? <p>{loginMessage}</p>}
-        </form>
+    <>
+      <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
       </div>
-    </div>
+      <form onSubmit={handleSubmit}>
+        <h3>Login Here</h3>
+
+        <Input
+          label="Email Address"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          type="password"
+          name="password"
+          label="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+
+        <button>Log In</button>
+        <div className="social">
+          {loginMessage ?? <p>{loginMessage}</p>}
+          <h4>
+            <Link to="/register">Register</Link>
+          </h4>
+        </div>
+      </form>
+    </>
   );
 };
 

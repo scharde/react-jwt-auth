@@ -52,54 +52,59 @@ const Register = () => {
     );
 
   return (
-    <div className="main-card">
-      <div className="card">
-        <form onSubmit={handleSubmit}>
-          <h2>Registration Form</h2>
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="username=">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Role:</label>
-            <select onChange={handleChange} name="role" value={formData.role}>
-              <option>Please choose one option</option>
-              {options.map((option, index) => {
-                return <option key={index}>{option}</option>;
-              })}
-            </select>
-          </div>
-          <button type="submit">Register</button>
-          {registerStatusMessage}
-        </form>
+    <>
+      <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
       </div>
-    </div>
+      <form onSubmit={handleSubmit}>
+        <h3>Register Here</h3>
+
+        <label>Name</label>
+        <input
+          type="text"
+          placeholder="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+
+        <label>Username</label>
+        <input
+          type="text"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+
+        <label>Role:</label>
+        <select onChange={handleChange} name="role" value={formData.role}>
+          <option>Please choose one option</option>
+          {options.map((option, index) => {
+            return <option key={index}>{option}</option>;
+          })}
+        </select>
+
+        <button>Register</button>
+        <div className="social">
+          {registerStatusMessage}
+          <br />
+          <h4>
+            <Link to="/login">Login</Link>
+          </h4>
+        </div>
+      </form>
+    </>
   );
 };
 

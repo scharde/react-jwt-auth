@@ -26,13 +26,16 @@ const getToken = (): string => {
 };
 
 const register = async (data: RegisterModel): Promise<AxiosResponse> => {
-  return await httpService.post<RegisterModel, AxiosResponse>("register", data);
+  return await httpService.post<RegisterModel, AxiosResponse>(
+    "auth/register",
+    data
+  );
 };
 
 const login = async (
   data: LoginModel
 ): Promise<AxiosResponse<LoginResponseModel>> => {
-  return await httpService.post<LoginModel, AxiosResponse>("login", data);
+  return await httpService.post<LoginModel, AxiosResponse>("auth/login", data);
 };
 
 const getDataFromToken = (): ITokenData | null => {
@@ -60,5 +63,5 @@ export {
   removeToken,
   getDataFromToken,
   isTokenValid,
-  getToken
+  getToken,
 };

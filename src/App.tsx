@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Register from "./components/Authentication/Register";
 import { getDataFromToken, isTokenValid } from "./services/authService";
-import Unauthorize from "./components/Unauthorise";
+import Unauthorize from "./components/Unauthorize";
 import Admin from "./components/Admin";
 import SuperAdmin from "./components/SuperAdmin";
 import User from "./components/User";
@@ -13,7 +13,7 @@ import User from "./components/User";
 enum RolesType {
   SuperAdmin = "SuperAdmin",
   Admin = "Admin",
-  User = "User"
+  User = "User",
 }
 
 function App() {
@@ -23,19 +23,51 @@ function App() {
       <Route path="register" element={<Register />} />
 
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<PrivateRoute allowedRoles={[RolesType.SuperAdmin, RolesType.Admin, RolesType.User]}/>}>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute
+              allowedRoles={[
+                RolesType.SuperAdmin,
+                RolesType.Admin,
+                RolesType.User,
+              ]}
+            />
+          }
+        >
           <Route path="/" element={<Home />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute allowedRoles={[RolesType.SuperAdmin]}/>}>
+        <Route
+          path="/"
+          element={<PrivateRoute allowedRoles={[RolesType.SuperAdmin]} />}
+        >
           <Route path="/superadmin" element={<SuperAdmin />} />
-        </Route> 
+        </Route>
 
-        <Route path="/" element={<PrivateRoute allowedRoles={[RolesType.SuperAdmin, RolesType.Admin]}/>}>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute
+              allowedRoles={[RolesType.SuperAdmin, RolesType.Admin]}
+            />
+          }
+        >
           <Route path="/admin" element={<Admin />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute allowedRoles={[RolesType.SuperAdmin, RolesType.Admin, RolesType.User]}/>}>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute
+              allowedRoles={[
+                RolesType.SuperAdmin,
+                RolesType.Admin,
+                RolesType.User,
+              ]}
+            />
+          }
+        >
           <Route path="/user" element={<User />} />
         </Route>
 
@@ -45,7 +77,7 @@ function App() {
   );
 }
 
-const PrivateRoute = ({ allowedRoles }: { allowedRoles : string[]}) => {
+const PrivateRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
   const isValid = isTokenValid();
 
   if (!isValid) {
@@ -53,7 +85,7 @@ const PrivateRoute = ({ allowedRoles }: { allowedRoles : string[]}) => {
   }
 
   var tokenData = getDataFromToken();
-  if (!allowedRoles.includes(tokenData?.role || "")) { 
+  if (!allowedRoles.includes(tokenData?.role || "")) {
     return <Navigate to="/unauthorize" />;
   }
 
